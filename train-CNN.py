@@ -1,11 +1,16 @@
-import tensorflow as tf
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 17 20:10:25 2020
+
+@author: rbianchi
+"""
+
+
 import tflearn
 import numpy as np
-import math
-import random
 from sklearn.metrics import classification_report, confusion_matrix 
 from sklearn.preprocessing import StandardScaler
-import matplotlib.pyplot as plt
 import time
 
 
@@ -44,10 +49,11 @@ all_output = np.zeros(num_fields*num_fields*num_total).reshape([num_fields, num_
 
 
 # Fill the input data
+# Choose here between real or simulated robot
+
 for sensor in sensor_order:
-  #all_data[:,sensor_order.index(sensor),:] = np.loadtxt("real/" + sensor + ".csv", delimiter=",")
-  #all_data[:,sensor_order.index(sensor),:] = np.hstack((np.loadtxt("real_new/" + sensor + ".csv", delimiter=","), np.loadtxt("real/" + sensor + ".csv", delimiter=",")))
-  all_data[:,sensor_order.index(sensor),:] = np.loadtxt("sim/" + sensor + ".csv", delimiter=",")
+  all_data[:,sensor_order.index(sensor),:] = np.loadtxt("real/" + sensor + ".csv", delimiter=",")
+  #all_data[:,sensor_order.index(sensor),:] = np.loadtxt("sim/" + sensor + ".csv", delimiter=",")
 
 all_data = all_data.reshape([num_fields, num_sensors, num_total, num_impact])
 
@@ -101,12 +107,6 @@ y_train = y_train.reshape([num_train*num_fields, num_fields])
 y_valid = y_valid.reshape([num_valid*num_fields, num_fields])
 y_test = y_test.reshape([num_test*num_fields, num_fields])
 
-print (np.shape(x_train))
-print (np.shape(x_valid))
-print (np.shape(x_test))
-print (np.shape(y_train))
-print (np.shape(y_valid))
-print (np.shape(y_test))
 
 
 #Input Layer
@@ -174,5 +174,4 @@ calc_accuracy(mat)
 print(classification_report(y_true, y_pred, target_names=field_order, digits = 10))
 
 print ("Mean time for predition: " + str(total_time/num_test))
-       
-model.summary()       
+         

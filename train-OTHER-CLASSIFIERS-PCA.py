@@ -46,11 +46,9 @@ all_output = np.zeros(num_fields*num_fields*num_total).reshape([num_fields, num_
 
 # Fill the input data
 for sensor in sensor_order:
-  all_data[:,sensor_order.index(sensor),:] = np.loadtxt("sim/" + sensor + ".csv", delimiter=",")
+  #all_data[:,sensor_order.index(sensor),:] = np.loadtxt("sim/" + sensor + ".csv", delimiter=",")
 
-
-  #all_data[:,sensor_order.index(sensor),:] = np.hstack((np.loadtxt("real_new/" + sensor + ".csv", delimiter=","),
-  #                                                       np.loadtxt("real/" + sensor + ".csv", delimiter=",")))
+  all_data[:,sensor_order.index(sensor),:] = np.loadtxt("real/" + sensor + ".csv", delimiter=",")
 
 all_data = all_data.reshape([num_fields, num_sensors, num_total, num_impact])
 
